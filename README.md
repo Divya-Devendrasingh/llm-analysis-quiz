@@ -1,1 +1,1 @@
-# llm-analysis-quiz
+# README content placeholder

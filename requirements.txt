@@ -1,2 +1,9 @@
 flask
-# requirements placeholder
+gunicorn
+requests
+playwright
+pandas
+pdfplumber
+openpyxl
+xlrd
+pdfminer.six

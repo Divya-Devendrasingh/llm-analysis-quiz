@@ -1,2 +1,11 @@
-version: '3.8'
-# docker-compose content placeholder
+version: "3.8"
+services:
+  app:
+    build: .
+    environment:
+      - QUIZ_SECRET=${QUIZ_SECRET}
+      - PORT=8080
+    ports:
+      - "8080:8080"
+    shm_size: "1gb"
+    restart: unless-stopped

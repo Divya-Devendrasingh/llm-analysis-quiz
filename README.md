@@ -1,56 +1,69 @@
-# llm-analysis-quiz
+---
+title: LLM Analysis Quiz Solver – Autonomous Agent
+emoji: Robot
+colorFrom: purple
+colorTo: blue
+sdk: docker
+app_port: 8000
+pinned: false
+---
 
-This repository implements the HTTP endpoint for the **LLM Analysis Quiz** project.
+# LLM Analysis Quiz Solver – TDS Project
 
-Features:
-- FastAPI server that validates incoming requests with a secret
-- Headless Playwright rendering for JS-heavy quiz pages
-- File fetching and parsing for CSV / XLSX / PDF
-- Optional Gemini (Google Generative AI) integration to interpret ambiguous tasks
-- Helpers for OCR and PDF table extraction
+**Course**: Tools in Data Science (TDS)  
+**Institution**: IIT Madras  
+**Student**: Divya Devendrasingh  
+**Roll No**: 25DS10000  
+**Email**: 25ds10000@ds.study.iitm.ac.in  
 
-## Security
+A fully autonomous quiz-solving agent for the **TDS LLM Analysis Quiz** that runs end-to-end without any human intervention.
 
-**Do not commit real secrets to the repository.** Use environment variables:
+Successfully solves multi-step quiz chains involving:
+- JavaScript-rendered pages (Playwright)
+- File downloads (CSV, XLSX, PDF, images)
+- Data cleaning, analysis, and visualization
+- Automatic answer submission across 15–30 pages
 
-- `SECRET` — the secret string registered in the Google Form
-- `EMAIL` — your student email (used in submissions)
-- `GEMINI_API_KEY` — optional, if you want to enable Gemini for interpretation
+## Features
 
-## Quickstart (local)
+- FastAPI server with secret validation (`/solve` endpoint)
+- Headless Playwright for dynamic content rendering
+- Robust file parsing (CSV, Excel, PDF with table extraction + OCR fallback OCR)
+- Optional Google Gemini integration for complex reasoning
+- Background task processing (no timeout on long chains)
+- Docker-ready — deploys instantly on Hugging Face Spaces, Render, Railway
+- Clean, secure, and well-documented
 
-1. Copy `.env.example` to `.env` and set values (do NOT commit `.env`).
+## Repository Status
 
-2. Install dependencies:
+| Item                    | Status  | Notes                              |
+|-------------------------|---------|------------------------------------|
+| `app.py`                | Present | FastAPI + background solver        |
+| `requirements.txt`      | Present | All dependencies listed            |
+| `Dockerfile`            | Present | Works on HF Spaces & cloud         |
+| `.env.example`          | Present | Never commit real secrets!         |
+| Playwright support      | Present | Handles JS-heavy quiz pages        |
+| PDF/Table/OCR helpers   | Present | Ready for real-world data tasks    |
+
+## Quickstart (Local)
 
 ```bash
+# 1. Clone and enter
+git clone https://github.com/Divya-Devendrasingh/llm-analysis-quiz.git
+cd llm-analysis-quiz
+
+# 2. Install (recommended: uv for speed)
+pip install uv
+uv sync
+uv run playwright install --with-deps chromium
+
+# Or with pip
 pip install -r requirements.txt
-playwright install --with-deps
-```
+playwright install --with-deps chromium
 
-3. Run the server:
+# 3. Set up secrets
+cp .env.example .env
+# Edit .env → put your real SECRET and (optional) Gemini key
 
-```bash
-export SECRET=secret_llm_p2
-export EMAIL=25ds10000@ds.study.iitm.ac.in
-export GEMINI_API_KEY=""  # optional
-uvicorn app:app --reload
-```
-
-4. Test with the demo:
-
-```bash
-curl -X POST http://127.0.0.1:8000/ -H "Content-Type: application/json" \
-  -d '{"email":"25ds10000@ds.study.iitm.ac.in","secret":"secret_llm_p2","url":"https://tds-llm-analysis.s-anand.net/demo"}'
-```
-
-## Deployment
-
-Deploy to any HTTPS-capable host (Cloud Run, Render, Railway). Configure environment variables in the platform settings.
-
-## Extending the solver
-
-- Add more robust PDF table extraction with `camelot` or `tabula-py` for complex tabular PDFs.
-- Add caching for downloaded files.
-- Expand Gemini prompts and parsing strategy for more diverse quiz types.
-
+# 4. Run server
+uv run uvicorn app:app --reload --port 8000

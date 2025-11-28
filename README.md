@@ -77,7 +77,7 @@ cp .env.example .env
 uv run uvicorn app:app --reload --port 8000
 Server running at: http://127.0.0.1:8000
 
-**Test Instantly (Demo Quiz)**
+####Test Instantly (Demo Quiz)
 Bashcurl -X POST http://127.0.0.1:8000/solve \
   -H "Content-Type: application/json" \
   -d '{
@@ -87,7 +87,7 @@ Bashcurl -X POST http://127.0.0.1:8000/solve \
   }'
 You’ll get {"status":"ok"} → watch the terminal as it solves every page automatically!
 
-**Final Step: Run Your Real Quiz (Just One Command)**
+####Final Step: Run Your Real Quiz (Just One Command)
 When you get your personal quiz link, run this (replace only the URL):
 Bashcurl -X POST http://127.0.0.1:8000/solve \
   -H "Content-Type: application/json" \
@@ -98,7 +98,7 @@ Bashcurl -X POST http://127.0.0.1:8000/solve \
   }'
 Go have coffee — it will finish everything perfectly.
 
-**One-Click Deploy to Hugging Face Spaces (Optional)**
+####One-Click Deploy to Hugging Face Spaces (Optional)
 
 Create new Space → select Docker
 Connect this GitHub repo
@@ -110,14 +110,14 @@ GEMINI_API_KEY → (optional)
 Done — your solver runs 24×7 online!
 
 
-**Security**
+####Security
 
 Never commit .env file
 All secrets loaded via environment variables only
 No hard-coded credentials
 
 
-**Future Upgrades (Already Planned)**
+####Future Upgrades (Already Planned)
 
 Add camelot-py / tabula-py for complex PDFs
 File caching system
@@ -125,10 +125,9 @@ LangGraph integration for advanced routing
 Live progress dashboard (Streamlit)
 
 
-**License**
+####License
 MIT License — fork, improve, share freely!
 
 
-                 **   Made with passion for Tools in Data Science, IIT Madras
-                            Divya Devendrasingh • November 2025
-**
+                 ##Made with passion for Tools in Data Science, IIT Madras
+                            Divya Devendrasingh • November 2025##

@@ -12,9 +12,8 @@ pinned: false
 
 **Course**: Tools in Data Science (TDS)  
 **Institution**: IIT Madras  
-**Student**: Divya Devendrasingh  
-**Roll No**: 25DS10000  
-**Email**: 25ds10000@ds.study.iitm.ac.in  
+**Student**: Divya Devendrasingh   
+**Email**: 25ds1000013@ds.study.iitm.ac.in  
 
 A fully autonomous quiz-solving agent for the **TDS LLM Analysis Quiz** that runs end-to-end without any human intervention.
 

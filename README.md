@@ -53,3 +53,4 @@ Deploy to any HTTPS-capable host (Cloud Run, Render, Railway). Configure environ
 - Add more robust PDF table extraction with `camelot` or `tabula-py` for complex tabular PDFs.
 - Add caching for downloaded files.
 - Expand Gemini prompts and parsing strategy for more diverse quiz types.
+

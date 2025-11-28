@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          playwright install --with-deps
+      - name: Run smoke server + demo test
+        env:
+          SECRET: test-secret
+        run: |
+          uvicorn app:app --port 8000 --host 127.0.0.1 &
+          sleep 4
+          python - <<'PY'
+import requests, time
+url = 'http://127.0.0.1:8000/'
+payload = {"email":"ci@example.com","secret":"test-secret","url":"https://tds-llm-analysis.s-anand.net/demo"}
+print('posting...')
+r = requests.post(url, json=payload, timeout=120)
+print(r.status_code)
+print(r.text[:800])
+PY
